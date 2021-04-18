@@ -148,5 +148,4 @@ public class FilterAction {
         BATH_AND_SHOWER_CURTAINS_PAGE.getCheckbox().get(165).shouldBe(Condition.visible).click(ClickOptions.usingJavaScript().offsetX(-30));
     }
 
-
 }
