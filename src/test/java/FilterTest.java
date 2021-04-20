@@ -1,4 +1,8 @@
 import actions.FilterAction;
+import actions.SortingAction;
+import com.google.common.collect.Ordering;
+import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import utils.Configuration;
@@ -6,11 +10,13 @@ import utils.Configuration;
 public class FilterTest {
     private FilterAction filterAction;
     private Configuration configuration;
+    private SortingAction sortingAction;
 
     @BeforeMethod
     private void opeSite() {
         filterAction = new FilterAction();
         configuration = new Configuration();
+        sortingAction = new SortingAction();
         configuration.openSite();
     }
 
@@ -18,7 +24,6 @@ public class FilterTest {
     private void useSellerFilterCheckItAndDelete() {
         filterAction.useRozetkaFilter();
         filterAction.checkFilterIsApplied("Rozetka");
-        filterAction.deleteFilter();
     }
 
     @Test(description = "Check Ready to send filter")
@@ -32,55 +37,55 @@ public class FilterTest {
         filterAction.useBrandFilter();
         filterAction.checkFilterIsApplied("Miranda");
         filterAction.getProductNamesAndCheckForBrandName("Miranda");
-        filterAction.deleteFilter();
     }
 
     @Test(description = "Check Price filter")
     private void usePriceRangeCheckItAndDelete() {
         filterAction.setPriceRange(20, -30);
         filterAction.clickOnSetPriceButton();
-        filterAction.checkHighestAndLowestPriceOnPage(4388, 29852);
+        filterAction.checkFilterIsApplied();
+        Assert.assertTrue(((Integer) Ordering.natural().min(sortingAction.getPriceListOfPageOne()) >= 4388)&&
+                ((Integer) Ordering.natural().max(sortingAction.getPriceListOfPageOne()) <=29852));
     }
 
     @Test(description = "Check Color filter")
     private void useColorFilterCheckItAndDelete() {
         filterAction.useColorFilter();
         filterAction.checkFilterIsApplied();
-        filterAction.deleteFilter();
     }
 
     @Test(description = "Check Material filter")
     private void useMaterialFilterCheckItAndDelete() {
         filterAction.useMaterialFilter();
         filterAction.checkFilterIsApplied();
-        filterAction.deleteFilter();
     }
 
     @Test(description = "Check Country filter")
     private void useCountryFilterCheckItAndDelete() {
         filterAction.useCountryFilter();
         filterAction.checkFilterIsApplied();
-        filterAction.deleteFilter();
     }
 
     @Test(description = "Check Register country filter")
     private void useRegisterCountryFilterCheckItAndDelete() {
         filterAction.useRegisterCountryFilter();
         filterAction.checkFilterIsApplied();
-        filterAction.deleteFilter();
     }
 
     @Test(description = "Check Stock filter")
     private void useStockFilterCheckItAndDelete() {
         filterAction.useStockFilter();
         filterAction.checkFilterIsApplied();
-        filterAction.deleteFilter();
     }
 
     @Test(description = "Check Available filter")
     private void useAvailableFilterCheckItAndDelete() {
         filterAction.useAvailableFilter();
         filterAction.checkFilterIsApplied();
+    }
+
+    @AfterMethod
+    private void deleteFilterAfterUsing(){
         filterAction.deleteFilter();
     }
 
