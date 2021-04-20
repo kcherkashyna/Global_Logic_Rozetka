@@ -12,33 +12,31 @@ public class BathAndShowerCurtainsPage {
         return $x("//*[@class='exponea-close-cross']");
     }
 
+    public SelenideElement getSortingButton() {
+        return $x("//*[@value='1: cheap']/parent::*");
+    }
+
     public SelenideElement getCheapSortingTypeFromDropDownList() {
-        $x("//*[@value='1: cheap']/parent::*").scrollTo().click();
         return $x("//*[@value='1: cheap']");
     }
 
     public SelenideElement getExpensiveSortingTypeFromDropDownList() {
-        $x("//*[@value='1: cheap']/parent::*").scrollTo().click();
         return $x("//*[@value='2: expensive']");
     }
 
     public SelenideElement getPopularitySortingTypeFromDropDownList() {
-        $x("//*[@value='1: cheap']/parent::*").scrollTo().click();
         return $x("//*[@value='3: popularity']");
     }
 
     public SelenideElement getNoveltySortingTypeFromDropDownList() {
-        $x("//*[@value='1: cheap']/parent::*").scrollTo().click();
         return $x("//*[@value='4: novelty']");
     }
 
     public SelenideElement getActionSortingTypeFromDropDownList() {
-        $x("//*[@value='1: cheap']/parent::*").scrollTo().click();
         return $x("//*[@value='5: action']");
     }
 
     public SelenideElement getRankSortingTypeFromDropDownList() {
-        $x("//*[@value='1: cheap']/parent::*").scrollTo().click();
         return $x("//*[@value='6: rank']");
     }
 
@@ -46,9 +44,7 @@ public class BathAndShowerCurtainsPage {
         return $$x("//*[@class='goods-tile__price-value']");
     }
 
-
     public SelenideElement getLowestPriceSlider() {
-        $x("//*[@data-filter-name='price']//*[@class='sidebar-block__toggle-title']").scrollTo();
         return $x("//*[@class='rz-slider__range-button rz-slider__range-button_type_left']");
     }
 
@@ -61,16 +57,15 @@ public class BathAndShowerCurtainsPage {
     }
 
     public SelenideElement getRozetkaCheckbox() {
-        $x("//*[@data-filter-name='seller']//*[@class='sidebar-block__toggle-title']").scrollTo();
         return $x("//*[@for='Rozetka']");
     }
 
-    public SelenideElement getFilterText() {
-        return $$x("//*[@class='catalog-selection__link']").first();
+    public ElementsCollection getFilterText() {
+        return $$x("//*[@class='catalog-selection__link']");
     }
 
-    public ElementsCollection getFilterDeleteButton() {
-        return $$x("//*[@class='catalog-selection__remove-icon']/*[1]");
+    public SelenideElement getFilterDeleteButton() {
+        return $x("//*[@class='catalog-selection__remove-icon']/*[1]");
     }
 
     public ElementsCollection getCheckbox() {
